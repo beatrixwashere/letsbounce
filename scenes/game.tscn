@@ -1,0 +1,267 @@
+[gd_scene format=3 uid="uid://yq5wxdf7cmsi"]
+
+[ext_resource type="Script" uid="uid://n3lebdvatqqr" path="res://scripts/game/indicator.gd" id="1_iywne"]
+[ext_resource type="Script" uid="uid://bihpdmgdq752v" path="res://scripts/game/game.gd" id="1_p57ef"]
+[ext_resource type="Script" uid="uid://vkqxlvukyps1" path="res://scripts/game/ball.gd" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://bfm3hpt2ds6tw" path="res://scripts/game/bgimage.gd" id="2_gee14"]
+[ext_resource type="Script" uid="uid://bobrsdqi3j7cv" path="res://scripts/game/audio.gd" id="3_lnu2h"]
+[ext_resource type="FontFile" uid="uid://cockucnwfmi13" path="res://sprites/sixtyfour.ttf" id="4_u5sy4"]
+[ext_resource type="Script" uid="uid://dchcdhlc3j3vb" path="res://scripts/game/visualizer.gd" id="6_p57ef"]
+
+[sub_resource type="Gradient" id="Gradient_yqjtg"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lnu2h"]
+gradient = SubResource("Gradient_yqjtg")
+
+[sub_resource type="Gradient" id="Gradient_8cj0n"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.71)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwrxv"]
+gradient = SubResource("Gradient_8cj0n")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_iywne"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.71)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p57ef"]
+gradient = SubResource("Gradient_iywne")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[node name="game" type="Node2D" unique_id=1796025840]
+script = ExtResource("1_p57ef")
+
+[node name="bg" type="ColorRect" parent="." unique_id=651465794]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="image" type="Sprite2D" parent="bg" unique_id=1316892289]
+modulate = Color(1, 1, 1, 0.2509804)
+centered = false
+script = ExtResource("2_gee14")
+
+[node name="visualizer" type="Node2D" parent="bg" unique_id=1733013890]
+position = Vector2(960, 880)
+script = ExtResource("6_p57ef")
+
+[node name="lanes" type="Control" parent="bg" unique_id=1651218177]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lane_0" type="ColorRect" parent="bg/lanes" unique_id=816419688]
+layout_mode = 0
+offset_left = 720.0
+offset_right = 816.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="lane_1" type="ColorRect" parent="bg/lanes" unique_id=1917832610]
+layout_mode = 0
+offset_left = 848.0
+offset_right = 944.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="lane_2" type="ColorRect" parent="bg/lanes" unique_id=524977866]
+layout_mode = 0
+offset_left = 976.0
+offset_right = 1072.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="lane_3" type="ColorRect" parent="bg/lanes" unique_id=1365196438]
+layout_mode = 0
+offset_left = 1104.0
+offset_right = 1200.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="bars" type="Node2D" parent="." unique_id=1672568784]
+
+[node name="bar_0" type="Sprite2D" parent="bars" unique_id=1660376848]
+position = Vector2(768, 832)
+scale = Vector2(0.3750002, 15.999992)
+texture = SubResource("GradientTexture1D_lnu2h")
+centered = false
+offset = Vector2(-128, 0)
+
+[node name="i0" type="Sprite2D" parent="bars/bar_0" unique_id=1662951503]
+visible = false
+modulate = Color(1, 1, 0, 0.2509804)
+texture_filter = 1
+position = Vector2(4.069002e-05, 1.1920929e-06)
+scale = Vector2(2.6666653, 0.06250003)
+texture = SubResource("GradientTexture2D_uwrxv")
+centered = false
+offset = Vector2(-32, -64)
+script = ExtResource("1_iywne")
+
+[node name="bar_1" type="Sprite2D" parent="bars" unique_id=953133509]
+position = Vector2(896.00006, 832)
+scale = Vector2(0.3750002, 15.999992)
+texture = SubResource("GradientTexture1D_lnu2h")
+centered = false
+offset = Vector2(-128, 0)
+
+[node name="i1" type="Sprite2D" parent="bars/bar_1" unique_id=1680094765]
+visible = false
+modulate = Color(1, 1, 0, 0.2509804)
+texture_filter = 1
+position = Vector2(4.069002e-05, 1.1920929e-06)
+scale = Vector2(2.6666653, 0.06250003)
+texture = SubResource("GradientTexture2D_uwrxv")
+centered = false
+offset = Vector2(-32, -64)
+script = ExtResource("1_iywne")
+
+[node name="bar_2" type="Sprite2D" parent="bars" unique_id=975130600]
+position = Vector2(1023.99994, 832)
+scale = Vector2(0.3750002, 15.999992)
+texture = SubResource("GradientTexture1D_lnu2h")
+centered = false
+offset = Vector2(-128, 0)
+
+[node name="i2" type="Sprite2D" parent="bars/bar_2" unique_id=1458060576]
+visible = false
+modulate = Color(1, 1, 0, 0.2509804)
+texture_filter = 1
+position = Vector2(4.069002e-05, 1.1920929e-06)
+scale = Vector2(2.6666653, 0.06250003)
+texture = SubResource("GradientTexture2D_uwrxv")
+centered = false
+offset = Vector2(-32, -64)
+script = ExtResource("1_iywne")
+
+[node name="bar_3" type="Sprite2D" parent="bars" unique_id=601974724]
+position = Vector2(1152, 832)
+scale = Vector2(0.3750002, 15.999992)
+texture = SubResource("GradientTexture1D_lnu2h")
+centered = false
+offset = Vector2(-128, 0)
+
+[node name="i3" type="Sprite2D" parent="bars/bar_3" unique_id=345584367]
+visible = false
+modulate = Color(1, 1, 0, 0.2509804)
+texture_filter = 1
+position = Vector2(4.069002e-05, 1.1920929e-06)
+scale = Vector2(2.6666653, 0.06250003)
+texture = SubResource("GradientTexture2D_uwrxv")
+centered = false
+offset = Vector2(-32, -64)
+script = ExtResource("1_iywne")
+
+[node name="feedback" type="Node2D" parent="." unique_id=2111661194]
+
+[node name="f0" type="RichTextLabel" parent="feedback" unique_id=39115578]
+modulate = Color(1, 1, 1, 0)
+offset_left = 720.0
+offset_top = 848.0
+offset_right = 816.0
+offset_bottom = 896.0
+theme_override_fonts/bold_font = ExtResource("4_u5sy4")
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[color=green][b]:3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="f1" type="RichTextLabel" parent="feedback" unique_id=1503900820]
+modulate = Color(1, 1, 1, 0)
+offset_left = 848.0
+offset_top = 848.0
+offset_right = 944.0
+offset_bottom = 896.0
+theme_override_fonts/bold_font = ExtResource("4_u5sy4")
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[color=green][b]:3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="f2" type="RichTextLabel" parent="feedback" unique_id=318984697]
+modulate = Color(1, 1, 1, 0)
+offset_left = 976.0
+offset_top = 848.0
+offset_right = 1072.0
+offset_bottom = 896.0
+theme_override_fonts/bold_font = ExtResource("4_u5sy4")
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[color=green][b]:3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="f3" type="RichTextLabel" parent="feedback" unique_id=1104094385]
+modulate = Color(1, 1, 1, 0)
+offset_left = 1104.0
+offset_top = 848.0
+offset_right = 1200.0
+offset_bottom = 896.0
+theme_override_fonts/bold_font = ExtResource("4_u5sy4")
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[color=green][b]:3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="balls" type="Node2D" parent="." unique_id=1010868142]
+
+[node name="b" type="Sprite2D" parent="." unique_id=1342625729]
+texture_filter = 1
+texture = SubResource("GradientTexture2D_p57ef")
+centered = false
+offset = Vector2(-32, -64)
+script = ExtResource("1_uwrxv")
+
+[node name="audio" type="AudioStreamPlayer" parent="." unique_id=1078588075]
+volume_db = -6.0
+script = ExtResource("3_lnu2h")
+
+[node name="out" type="ColorRect" parent="audio" unique_id=954635237]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0)
+
+[node name="score" type="RichTextLabel" parent="." unique_id=369160111]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 544.0
+offset_bottom = 288.0
+theme_override_fonts/normal_font = ExtResource("4_u5sy4")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "100.0% (0)[font_size=24]
+[color=green]:3[/color] - 0
+[color=yellow]:][/color] - 0
+[color=orange]:/[/color] - 0
+[color=red]:<[/color] - 0
+
+[color=magenta]S++"
+vertical_alignment = 1
+
+[node name="info" type="RichTextLabel" parent="." unique_id=707694672]
+offset_left = 1248.0
+offset_top = 32.0
+offset_right = 1888.0
+offset_bottom = 224.0
+theme_override_fonts/normal_font = ExtResource("4_u5sy4")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "title
+
+[font_size=18]author
+
+difficulty: 5/10"
+horizontal_alignment = 2
+vertical_alignment = 1

@@ -1,0 +1,397 @@
+[gd_scene format=3 uid="uid://ccaal1pycb54f"]
+
+[ext_resource type="Script" uid="uid://ck1j1lo4xyg1w" path="res://scripts/editor/editor.gd" id="1_b1cmn"]
+[ext_resource type="Script" uid="uid://bin5dvqigaly4" path="res://scripts/editor/eaudio.gd" id="2_ba0ut"]
+[ext_resource type="Script" uid="uid://bfm3hpt2ds6tw" path="res://scripts/game/bgimage.gd" id="2_eqbpn"]
+[ext_resource type="FontFile" uid="uid://dr3bb0gkdg2gs" path="res://sprites/chakra_petch.ttf" id="2_xg7d5"]
+
+[sub_resource type="Gradient" id="Gradient_yqjtg"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lnu2h"]
+gradient = SubResource("Gradient_yqjtg")
+
+[sub_resource type="Gradient" id="Gradient_iywne"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.71)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b1cmn"]
+gradient = SubResource("Gradient_iywne")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="GDScript" id="GDScript_q68jb"]
+script/source = "class_name EBall
+extends Sprite2D
+
+var timing: Array[Vector2]
+var ref: EBall
+var objs: Array[EBall]
+
+
+func add_ball(tx: float, ty: float, prev: EBall = null) -> void:
+	if prev:
+		ref = prev
+	if ref:
+		ref.add_ball(tx, ty)
+	else:
+		timing.append(Vector2(tx, ty))
+
+
+func add_obj(obj: EBall) -> void:
+	if ref:
+		ref.add_obj(obj)
+	else:
+		objs.append(obj)
+
+
+func delete_ball() -> void:
+	if ref:
+		ref.delete_ball()
+	else:
+		for i in objs:
+			i.queue_free()
+"
+
+[node name="editor" type="Node2D" unique_id=1796025840]
+
+[node name="bg" type="ColorRect" parent="." unique_id=651465794]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="image" type="Sprite2D" parent="bg" unique_id=1473752492]
+modulate = Color(1, 1, 1, 0.2509804)
+centered = false
+script = ExtResource("2_eqbpn")
+
+[node name="lanes" type="Control" parent="bg" unique_id=1651218177]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lane_0" type="ColorRect" parent="bg/lanes" unique_id=816419688]
+layout_mode = 0
+offset_left = 720.0
+offset_right = 816.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="lane_1" type="ColorRect" parent="bg/lanes" unique_id=1917832610]
+layout_mode = 0
+offset_left = 848.0
+offset_right = 944.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="lane_2" type="ColorRect" parent="bg/lanes" unique_id=524977866]
+layout_mode = 0
+offset_left = 976.0
+offset_right = 1072.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="lane_3" type="ColorRect" parent="bg/lanes" unique_id=1365196438]
+layout_mode = 0
+offset_left = 1104.0
+offset_right = 1200.0
+offset_bottom = 1080.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="editor" type="Node2D" parent="." unique_id=930632579]
+position = Vector2(720, 832)
+script = ExtResource("1_b1cmn")
+
+[node name="buttons" type="Node2D" parent="editor" unique_id=381435667]
+
+[node name="base" type="Node2D" parent="editor/buttons" unique_id=1488411429]
+
+[node name="bar" type="Sprite2D" parent="editor/buttons/base" unique_id=1195845235]
+modulate = Color(1, 1, 1, 0.5019608)
+position = Vector2(48, 0)
+scale = Vector2(0.3750002, 15.999992)
+texture = SubResource("GradientTexture1D_lnu2h")
+centered = false
+offset = Vector2(-128, 0)
+
+[node name="button" type="Button" parent="editor/buttons/base" unique_id=2113872465]
+modulate = Color(1, 1, 1, 0.5019608)
+offset_right = 96.0
+offset_bottom = 16.0
+
+[node name="label" type="Label" parent="editor/buttons/base" unique_id=846576645]
+offset_left = -144.0
+offset_right = -16.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="balls" type="Node2D" parent="editor" unique_id=525493509]
+
+[node name="audio" type="AudioStreamPlayer" parent="editor" unique_id=897705306]
+volume_db = -6.0
+script = ExtResource("2_ba0ut")
+
+[node name="play" type="Button" parent="editor/audio" unique_id=891357386]
+offset_left = 64.0
+offset_top = 320.0
+offset_right = 192.0
+offset_bottom = 384.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+text = "play"
+
+[node name="stop" type="Button" parent="editor/audio" unique_id=1493899834]
+offset_left = 64.0
+offset_top = 448.0
+offset_right = 192.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+text = "stop"
+
+[node name="b" type="Sprite2D" parent="editor" unique_id=163277075]
+visible = false
+texture_filter = 1
+position = Vector2(48, 0)
+texture = SubResource("GradientTexture2D_b1cmn")
+centered = false
+offset = Vector2(-32, -64)
+script = SubResource("GDScript_q68jb")
+
+[node name="line" type="Line2D" parent="editor/b" unique_id=1537112533]
+z_index = 1
+position = Vector2(0, -32)
+width = 16.0
+
+[node name="button" type="Button" parent="editor/b" unique_id=1817072217]
+offset_left = -16.0
+offset_top = -48.0
+offset_right = 16.0
+offset_bottom = -16.0
+text = "X"
+
+[node name="export" type="Button" parent="." unique_id=288353655]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+text = "export"
+
+[node name="file_dialog" type="FileDialog" parent="export" unique_id=1291135134]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(960, 540)
+access = 2
+filters = PackedStringArray("*.lbm")
+
+[node name="status" type="Label" parent="export" unique_id=1254574159]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 16
+
+[node name="load" type="Button" parent="." unique_id=417640682]
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 256.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+text = "load"
+
+[node name="file_dialog" type="FileDialog" parent="load" unique_id=1213689573]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(960, 540)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.lbm")
+
+[node name="status" type="Label" parent="load" unique_id=431031675]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 16
+
+[node name="back" type="Button" parent="." unique_id=916042799]
+offset_left = 64.0
+offset_top = 960.0
+offset_right = 192.0
+offset_bottom = 1024.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+text = "back"
+
+[node name="info" type="Node2D" parent="." unique_id=270821321]
+
+[node name="title" type="LineEdit" parent="info" unique_id=424287414]
+offset_left = 1280.0
+offset_top = 64.0
+offset_right = 1856.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "[title]"
+
+[node name="author" type="LineEdit" parent="info" unique_id=314466148]
+offset_left = 1280.0
+offset_top = 192.0
+offset_right = 1856.0
+offset_bottom = 256.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "[author]"
+
+[node name="audio" type="LineEdit" parent="info" unique_id=173367061]
+offset_left = 1280.0
+offset_top = 320.0
+offset_right = 1792.0
+offset_bottom = 384.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "[audio path]"
+
+[node name="add" type="Button" parent="info/audio" unique_id=1366558073]
+layout_mode = 0
+offset_left = 512.0
+offset_right = 576.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 36
+text = "+"
+
+[node name="file_dialog" type="FileDialog" parent="info/audio/add" unique_id=1896168988]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(960, 540)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.mp3,*.wav,*.ogg")
+
+[node name="bpm" type="SpinBox" parent="info" unique_id=1505473176]
+offset_left = 1280.0
+offset_top = 448.0
+offset_right = 1536.0
+offset_bottom = 512.0
+min_value = 1.0
+max_value = 300.0
+value = 120.0
+
+[node name="label" type="Label" parent="info/bpm" unique_id=1139740645]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 16
+text = "bpm"
+
+[node name="starttime" type="SpinBox" parent="info" unique_id=111520553]
+offset_left = 1600.0
+offset_top = 448.0
+offset_right = 1856.0
+offset_bottom = 512.0
+allow_greater = true
+
+[node name="label" type="Label" parent="info/starttime" unique_id=599212358]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 16
+text = "start time"
+
+[node name="difficulty" type="SpinBox" parent="info" unique_id=930547231]
+offset_left = 1280.0
+offset_top = 576.0
+offset_right = 1536.0
+offset_bottom = 640.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="label" type="Label" parent="info/difficulty" unique_id=645809475]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 16
+text = "difficulty"
+
+[node name="lastbar" type="SpinBox" parent="info" unique_id=573031184]
+offset_left = 1600.0
+offset_top = 576.0
+offset_right = 1856.0
+offset_bottom = 640.0
+min_value = 1.0
+max_value = 300.0
+value = 1.0
+allow_greater = true
+
+[node name="label" type="Label" parent="info/lastbar" unique_id=934542617]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 16
+text = "last bar"
+
+[node name="background" type="LineEdit" parent="info" unique_id=1643610667]
+offset_left = 1280.0
+offset_top = 704.0
+offset_right = 1792.0
+offset_bottom = 768.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "[background path]"
+
+[node name="add" type="Button" parent="info/background" unique_id=288706892]
+layout_mode = 0
+offset_left = 512.0
+offset_right = 576.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("2_xg7d5")
+theme_override_font_sizes/font_size = 36
+text = "+"
+
+[node name="file_dialog" type="FileDialog" parent="info/background/add" unique_id=2082799638]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(960, 540)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png,*.jpg")
+
+[connection signal="button_down" from="editor/audio/play" to="editor/audio" method="eplay"]
+[connection signal="button_down" from="editor/audio/stop" to="editor/audio" method="estop"]
+[connection signal="button_down" from="editor/b/button" to="editor/b" method="delete_ball"]
+[connection signal="button_down" from="export" to="export/file_dialog" method="set_visible" binds= [true]]
+[connection signal="file_selected" from="export/file_dialog" to="editor" method="export_map"]
+[connection signal="button_down" from="load" to="load/file_dialog" method="set_visible" binds= [true]]
+[connection signal="file_selected" from="load/file_dialog" to="editor" method="import_map"]
+[connection signal="button_down" from="back" to="editor" method="back_to_main"]
+[connection signal="button_down" from="info/audio/add" to="info/audio/add/file_dialog" method="set_visible" binds= [true]]
+[connection signal="file_selected" from="info/audio/add/file_dialog" to="editor/audio" method="load_stream"]
+[connection signal="file_selected" from="info/audio/add/file_dialog" to="info/audio" method="_set_text" binds= [false]]
+[connection signal="value_changed" from="info/bpm" to="editor" method="change_bpm"]
+[connection signal="value_changed" from="info/starttime" to="editor" method="change_start"]
+[connection signal="button_down" from="info/background/add" to="info/background/add/file_dialog" method="set_visible" binds= [true]]
+[connection signal="file_selected" from="info/background/add/file_dialog" to="bg/image" method="load_image"]
+[connection signal="file_selected" from="info/background/add/file_dialog" to="info/background" method="_set_text" binds= [false]]

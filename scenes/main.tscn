@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b2nai3lfjfnpm"]
+
+[ext_resource type="Script" uid="uid://bfm3hpt2ds6tw" path="res://scripts/game/bgimage.gd" id="1_0wfyh"]
+[ext_resource type="FontFile" uid="uid://cockucnwfmi13" path="res://sprites/sixtyfour.ttf" id="2_sugp2"]
+[ext_resource type="FontFile" uid="uid://dr3bb0gkdg2gs" path="res://sprites/chakra_petch.ttf" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://cqh3gwrvgwjxm" path="res://scripts/menu/playbutton.gd" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://dax7ba34bak54" path="res://scripts/menu/editorbutton.gd" id="5_tefeu"]
+[ext_resource type="Script" uid="uid://cokgxe74vdlrw" path="res://scripts/menu/offset.gd" id="6_tefeu"]
+
+[node name="main" type="Node2D" unique_id=1821933660]
+
+[node name="bg" type="ColorRect" parent="." unique_id=215565868]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="image" type="Sprite2D" parent="bg" unique_id=912780971]
+modulate = Color(1, 1, 1, 0.2509804)
+centered = false
+script = ExtResource("1_0wfyh")
+
+[node name="header" type="RichTextLabel" parent="." unique_id=900812484]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1888.0
+offset_bottom = 160.0
+theme_override_fonts/normal_font = ExtResource("2_sugp2")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "letsbounce"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="play" type="Button" parent="." unique_id=856250311]
+offset_left = 832.0
+offset_top = 256.0
+offset_right = 1088.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("3_sugp2")
+theme_override_font_sizes/font_size = 24
+text = "play"
+script = ExtResource("4_tbgi4")
+
+[node name="file_dialog" type="FileDialog" parent="play" unique_id=1125401697]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(960, 540)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.lbm")
+
+[node name="editor" type="Button" parent="." unique_id=1573977739]
+offset_left = 832.0
+offset_top = 384.0
+offset_right = 1088.0
+offset_bottom = 448.0
+theme_override_fonts/font = ExtResource("3_sugp2")
+theme_override_font_sizes/font_size = 24
+text = "editor"
+script = ExtResource("5_tefeu")
+
+[node name="offset" type="SpinBox" parent="." unique_id=1206998890]
+offset_left = 832.0
+offset_top = 512.0
+offset_right = 1088.0
+offset_bottom = 576.0
+max_value = 500.0
+allow_greater = true
+script = ExtResource("6_tefeu")
+
+[node name="label" type="Label" parent="offset" unique_id=1737346774]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("3_sugp2")
+theme_override_font_sizes/font_size = 16
+text = "audio offset (ms)"
+
+[connection signal="button_down" from="play" to="play/file_dialog" method="set_visible" binds= [true]]
+[connection signal="file_selected" from="play/file_dialog" to="play" method="play_click"]
+[connection signal="button_down" from="editor" to="editor" method="editor_click"]
