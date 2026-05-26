@@ -111,8 +111,12 @@ func export_map(path: String) -> void:
 	zip.close_file()
 	
 	zip.start_file("timing.lbt")
-	for i in t:
-		i.sort()
+	for i in range(4):
+		t[i].sort()
+		var dict: Dictionary = {}
+		for j in t[i]:
+			dict[j] = 0
+		t[i] = dict.keys()
 	zip.write_file(var_to_bytes(t))
 	zip.close_file()
 	
