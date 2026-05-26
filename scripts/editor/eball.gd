@@ -1,12 +1,12 @@
-class_name EBall
+class_name EditorBall
 extends Sprite2D
 
 var timing: Array[Vector2]
-var ref: EBall
-var objs: Array[EBall]
+var ref: EditorBall
+var objs: Array[EditorBall]
 
 
-func add_ball(tx: float, ty: float, prev: EBall = null) -> void:
+func add_ball(tx: float, ty: float, prev: EditorBall = null) -> void:
 	if prev:
 		ref = prev
 	if ref:
@@ -15,7 +15,7 @@ func add_ball(tx: float, ty: float, prev: EBall = null) -> void:
 		timing.append(Vector2(tx, ty))
 
 
-func add_obj(obj: EBall) -> void:
+func add_obj(obj: EditorBall) -> void:
 	if ref:
 		ref.add_obj(obj)
 	else:
