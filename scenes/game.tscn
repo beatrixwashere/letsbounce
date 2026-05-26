@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bobrsdqi3j7cv" path="res://scripts/game/audio.gd" id="3_lnu2h"]
 [ext_resource type="FontFile" uid="uid://cockucnwfmi13" path="res://sprites/sixtyfour.ttf" id="4_u5sy4"]
 [ext_resource type="Script" uid="uid://dchcdhlc3j3vb" path="res://scripts/game/visualizer.gd" id="6_p57ef"]
+[ext_resource type="FontFile" uid="uid://dr3bb0gkdg2gs" path="res://sprites/chakra_petch.ttf" id="8_gee14"]
 
 [sub_resource type="Gradient" id="Gradient_yqjtg"]
 interpolation_mode = 1
@@ -265,3 +266,14 @@ text = "title
 difficulty: 5/10"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="back" type="Button" parent="." unique_id=152795714]
+offset_left = 64.0
+offset_top = 960.0
+offset_right = 192.0
+offset_bottom = 1024.0
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 24
+text = "back"
+
+[connection signal="button_down" from="back" to="." method="back_to_main"]

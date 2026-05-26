@@ -44,6 +44,10 @@ func _physics_process(_delta: float) -> void:
 		feedback[i].modulate.a -= 0.05
 
 
+func back_to_main() -> void:
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
+
+
 func hit_ball(l: int) -> void:
 	bars[l].self_modulate = Color(1, 1, 0, 1)
 	create_tween().tween_property(bars[l], "self_modulate:b", 1, 0.25)
