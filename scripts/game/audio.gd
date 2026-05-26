@@ -10,6 +10,7 @@ func _ready() -> void:
 	create_tween().tween_property(get_node("out"), "color:a", 1, 3)
 	await get_tree().create_timer(3).timeout
 	stop()
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
 func load_buffer(b: PackedByteArray, e: String) -> void:
