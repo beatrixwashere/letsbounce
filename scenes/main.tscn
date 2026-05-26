@@ -81,3 +81,4 @@ text = "audio offset (ms)"
 [connection signal="button_down" from="play" to="play/file_dialog" method="set_visible" binds= [true]]
 [connection signal="file_selected" from="play/file_dialog" to="play" method="play_click"]
 [connection signal="button_down" from="editor" to="editor" method="editor_click"]
+[connection signal="value_changed" from="offset" to="offset" method="new_offset"]

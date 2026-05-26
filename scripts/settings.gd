@@ -1,6 +1,6 @@
 extends Node
 
-var audio_offset: float = 0.25
+var audio_offset: float = 0
 var pre_beats: float = 5.0
 var bpm: float = 142.0
 var start_time: float = 0.0
